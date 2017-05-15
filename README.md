@@ -1,1 +1,1 @@
-# Geosoftware_Uebung03_02
+# Geosoftware_Uebung02

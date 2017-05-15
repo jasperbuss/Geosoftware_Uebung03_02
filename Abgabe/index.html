@@ -1,0 +1,68 @@
+<!--Niklas Trzaska: 416024-->
+<!--Benjamin Karic: 429331-->
+<!--Layout template from: https://getbootstrap.com/examples/starter-template/-->
+<!-- Asked for permission --> 
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+        <title>Calculate distances</title>
+
+        <!-- Bootstrap core CSS --> 
+        <!-- Asked for permission --> 
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="css/layout.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Geosoftware Task 02</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container">
+            <div class="starter-template">
+                <h1>Calculate Coordinates</h1>
+                <p class="lead">Use this side to calculate the distances of coodinates.</p>
+                <p class="lead">Upload a file please.</p>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input id="uploadPolylineButton" type="file" accept="text/plain" style="width: 600px">
+                </div>
+                <div class="col">
+                    <div id="result" class="row"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="js/GeOO.js"></script>
+        <script src="js/getValidCoordinatesAsArray.js"></script>
+        <script src="js/processPolylineFileUpload.js"></script>
+    </body>
+
+</html>

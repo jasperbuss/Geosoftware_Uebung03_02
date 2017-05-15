@@ -1,0 +1,17 @@
+/*Niklas Trzaska: 416024*/
+/*Benjamin Karic: 429331*/
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+input{
+    width: 150px;
+}
+
+#distancesTable {
+  margin-top: 100px;
+}
