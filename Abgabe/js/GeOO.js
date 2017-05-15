@@ -1,5 +1,5 @@
 //Niklas Trzaska: 416024
-//Benjamin Karic: 429331
+
 //
 ////This library is intended to force information hiding.
 // Per default, js-Objects do not protect attributes. The downside is, that I can never be sure abut the propper
@@ -28,6 +28,7 @@ const GeOO = () => {
             if (newValueIsNumber(newHorizontalValue)) {
                 horizontalValue = newHorizontalValue;
             } else {
+                JL("Point2D.setHorizontalValue").error("Given value -> " + newHorizontalValue + " <- is not a number.");
                 throw new TypeError("Given value -> " + newHorizontalValue + " <- is not a number.");
             }
         };
@@ -48,6 +49,7 @@ const GeOO = () => {
             if (newValueIsNumber(newVerticalValue)) {
                 verticalValue = newVerticalValue;
             } else {
+                JL("Point2D.setVerticalValue").error("Given value -> " + newVerticalValue + " <- is not a number.");
                 throw new TypeError("Given value -> " + newVerticalValue + " <- is not a number.");
             }
         };
@@ -94,6 +96,7 @@ const GeOO = () => {
             if (isPoint2D(newStartPoint)) {
                 startPoint = newStartPoint;
             } else {
+                JL("Line2D.setStart").error("Given value -> " + newStartPoint + " <- is not a Point2D.");
                 throw new TypeError("Given value -> " + newStartPoint + " <- is not a Point2D.");
             }
         };
@@ -114,6 +117,7 @@ const GeOO = () => {
             if (isPoint2D(newEndPoint)) {
                 endPoint = newEndPoint;
             } else {
+                JL("Line2D.setEnd").error("Given value -> " + newEndPoint + " <- is not a Point2D.");
                 throw new TypeError("Given value -> " + newEndPoint + " <- is not a Point2D.");
             }
         };
@@ -153,6 +157,7 @@ const GeOO = () => {
             if (validPositionInArray(position, linesegments)) {
                 return linesegments[position];
             } else {
+                JL("Polyline2D.getSegmentAtPosition").warn("Requested position is not an index for a segment. Valid indexes are currently integers from the interval [0,+" + linesegments.length - 1 + "].");
                 throw new RangeError("Requested position is not an index for a segment. Valid indexes are currently integers from the interval [0,+" + linesegments.length - 1 + "].");
             }
         };
@@ -169,6 +174,7 @@ const GeOO = () => {
             if (isLine2D(line2DSegment)) {
                 linesegments.push(line2DSegment);
             } else {
+                JL("Polyline2D.addLinesegmentToEnd").error("Given value -> " + line2DSegment + " <- is not a Line2D.");
                 throw new TypeError("Given value -> " + line2DSegment + " <- is not a Line2D.");
             }
         };
@@ -288,6 +294,7 @@ const GeOO = () => {
             try {
                 return instanciatePoint2D(horizontalValue, verticalValue, coordinateReferenceSystem);
             } catch (error) {
+                JL("newPoint2D").error("Error " + error);
                 throw error;
             }
         },
@@ -296,6 +303,7 @@ const GeOO = () => {
             try {
                 return instanciateLine2D(start, end);
             } catch (error) {
+                JL("newLine2D").error("Error " + error);
                 throw error;
             }
         },
@@ -306,6 +314,7 @@ const GeOO = () => {
                 let result = lines2D[0] instanceof Array ? instanciatePolyline2DwithArray(lines2D[0]) : instanciatePolyline2DwithArray(lines2D);
                 return result;
             } catch (error) {
+                JL("newPolyline2D").error("Error " + error);
                 throw error;
             }
 
@@ -332,6 +341,7 @@ const GeOO = () => {
             point.setCoordinateReferenceSystem(coordinateReferenceSystem);
             return point;
         } catch (error) {
+            JL("instanciatePoint2D").error("Error " + error);
             throw error;
         }
     }
@@ -350,11 +360,12 @@ const GeOO = () => {
             line.setEnd(end);
             return line;
         } catch (error) {
+            JL("instanciateLine2D").error("Error " + error);
             throw error;
         }
     }
-    
-    
+
+
     /**
      * 
      * @param {type} lines2D
@@ -368,6 +379,7 @@ const GeOO = () => {
             });
             return polyline;
         } catch (error) {
+            JL("instanciatePolyline2DwithArray").error("Error " + error);
             throw error;
         }
     }

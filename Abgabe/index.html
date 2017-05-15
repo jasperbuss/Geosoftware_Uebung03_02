@@ -1,5 +1,5 @@
 <!--Niklas Trzaska: 416024-->
-<!--Benjamin Karic: 429331-->
+
 <!--Layout template from: https://getbootstrap.com/examples/starter-template/-->
 <!-- Asked for permission --> 
 
@@ -60,6 +60,18 @@
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
+        <script src="js/jsnlog.min.js"></script>
+        <script>
+            // Configure jsnlog for console output.
+            // Source: http://js.jsnlog.com/Documentation/JSNLogJs/ConsoleAppender
+
+            const consoleAppender = JL.createConsoleAppender('consoleAppender');
+            JL().setOptions({"appenders": [consoleAppender]}); // By not specifieing a logger (like JL("mylogger")) all loggers log to the given appenders in the array - here just the console.
+
+            // Ensure, that the logger is running
+            
+            JL().info("jsnlog is working");
+        </script>
         <script src="js/GeOO.js"></script>
         <script src="js/getValidCoordinatesAsArray.js"></script>
         <script src="js/processPolylineFileUpload.js"></script>

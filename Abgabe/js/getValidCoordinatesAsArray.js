@@ -1,5 +1,5 @@
 //Niklas Trzaska: 416024
-//Benjamin Karic: 429331
+
 
 /**
  * @description Returns a string of valid coordinates in the form lat,lon,lat,lon....
@@ -11,7 +11,8 @@ function getValidCoordinatesFromTextfile(filecontent) {
         const numericContentAsStrig = getNumericFileContent(filecontent);
         return getValidInputAsArray(numericContentAsStrig);
     } catch (error) {
-       throw(error);
+        JL("getValidCoordinatesFromTextfile").warn("Message " + error);
+        throw(error);
     }
 }
 
@@ -23,11 +24,13 @@ function getValidCoordinatesFromTextfile(filecontent) {
  * @return {Array} String without whitespaces, if the input was valid.
  */
 function getNumericFileContent(fielcontent) {
-    const numericContent = /-?\d*\.\d*, -?\d*\.\d*/g; // First we extract only the numeric content. Validation does another function.
-    if (numericContent.length === 0) {
-        throw Error("No numeric input in file extrected with scemathe scema " + numericContent);
+    const numericSchema = /-?\d*\.\d*, -?\d*\.\d*/g; // First we extract only the numeric content. Validation does another function.
+    const content = fielcontent.match(numericSchema)
+    if (!content) {
+        JL("getNumericFileContent").warn("No numeric input in file extrected with scemathe scema " + numericSchema);
+        throw Error("No numeric input in file extrected with scemathe scema " + numericSchema);
     } else {
-        return fielcontent.match(numericContent);
+        return content;
     }
 }
 
@@ -39,28 +42,29 @@ function getNumericFileContent(fielcontent) {
  * @return {Array} String without whitespaces, if the input was valid.
  */
 function getValidInputAsArray(commaSeparatedStringValues) {
-    
-    const inputAsString = String(commaSeparatedStringValues).replace(/ /g,''); // Whitespacereplacement from http://stackoverflow.com/questions/6623231/remove-all-white-spaces-from-text
+
+    const inputAsString = String(commaSeparatedStringValues).replace(/ /g, ''); // Whitespacereplacement from http://stackoverflow.com/questions/6623231/remove-all-white-spaces-from-text
     const inputAsArray = inputAsString.split(",");
-    
+
     const validLat = /^(-?((((([0-8]{1,2})|([0-8]9?))(\.\d{0,6})?))|90(\.0{0,6})?))$/; // Regexp for validation of Latitude-values. Must be in [-90.90]
     const validLon = /^(-?(((([0-9]{1,2})|(1[0-7]{0,1}[0-9]{0,1}))(\.\d{0,6})?)|180(\.0{0,6})?))$/;
     // Regexp for validation of Lon-values. Must be in [-180.180]
-    
+
     const output = [];
-    for(let i = 0; i < inputAsArray.length-1; i+=2){
+    for (let i = 0; i < inputAsArray.length - 1; i += 2) {
         const latValid = validLat.test(inputAsArray[i]); // expecting the i-value to be latitude
-        const lonValid = validLon.test(inputAsArray[i+1]); // expectig the i+1 value to be longitude
-        if(latValid && lonValid){
+        const lonValid = validLon.test(inputAsArray[i + 1]); // expectig the i+1 value to be longitude
+        if (latValid && lonValid) {
             output.push(inputAsArray[i]);
-            output.push(inputAsArray[i+1]);
+            output.push(inputAsArray[i + 1]);
         }
     }
-    
+
     if (output.length < 4) { // At least 
+        JL("getValidInputAsArray").warn("Not enough values for a polyline. Please provide at least 2 valid coordinate tuples");
         throw Error("Not enough values for a polyline. Please provide at least 2 valid coordinate tuples");
     }
-    
-    console.log("Array from which the polyline is constructed: " + output);
+
+    JL("getValidInputAsArray").log("Array from which the polyline is constructed: " + output);
     return output;
 }

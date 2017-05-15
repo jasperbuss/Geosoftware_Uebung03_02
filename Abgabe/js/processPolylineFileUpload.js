@@ -1,5 +1,5 @@
 //Niklas Trzaska: 416024
-//Benjamin Karic: 429331
+
 
 const myGeOO = GeOO(); // The geometry-help I am using in this file.
 
