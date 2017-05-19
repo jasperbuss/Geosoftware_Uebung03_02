@@ -1,5 +1,5 @@
 //Niklas Trzaska: 416024
-
+//Jasper Buß: 430423
 //
 ////This library is intended to force information hiding.
 // Per default, js-Objects do not protect attributes. The downside is, that I can never be sure abut the propper
